@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: neoink-n8n
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: true
+      - key: N8N_BASIC_AUTH_USER
+        value: neoink
+      - key: N8N_BASIC_AUTH_PASSWORD
+        generateValue: true
+      - key: N8N_HOST
+        value: neoink-n8n.onrender.com
+      - key: N8N_PORT
+        value: 5678
+      - key: N8N_PROTOCOL
+        value: https
+      - key: WEBHOOK_URL
+        value: https://neoink-n8n.onrender.com
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+      - key: DB_TYPE
+        value: sqlite
+      - key: DB_SQLITE_DATABASE_FILE
+        value: /data/database.sqlite
+      - key: EXECUTIONS_MODE
+        value: regular
+      - key: GENERIC_TIMEZONE
+        value: Europe/London
+    disk:
+      name: n8n-data
+      mountPath: /data
+      sizeGB: 1
